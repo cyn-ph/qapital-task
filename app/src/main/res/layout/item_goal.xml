@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="goal"
+      type="com.qapital.common.beans.Goal" />
+
+    <variable
+      name="listener"
+      type="com.qapital.goals.view.GoalsAdapter.GoalsListener" />
+  </data>
+
+  <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:onClick="@{() -> listener.onGoalSelected(goal)}">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <ImageView
+        android:id="@+id/img_goal"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:contentDescription="@null"
+        app:imageUrl="@{goal.imageUrl}" />
+
+      <TextView
+        android:id="@+id/txt_goal_name"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_goal"
+        android:layout_margin="12dp"
+        android:text="@{goal.name}"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        tools:text="Road Trip" />
+
+      <TextView
+        android:id="@+id/txt_goal_progress"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_goal"
+        android:layout_margin="12dp"
+        android:text="@{@string/progress_format(goal.currentAmount,goal.targetAmount)}"
+        tools:text="$230 of $1900" />
+
+    </RelativeLayout>
+
+  </android.support.v7.widget.CardView>
+</layout>

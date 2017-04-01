@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Qapital</string>
+  <!-- Goals list-->
+  <string name="progress_format">$ %1$s of $ %2$s</string>
+</resources>
