@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+      name="feedElement"
+      type="com.qapital.common.beans.FeedElement" />
+  </data>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/small"
+    android:paddingTop="@dimen/small">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{feedElement.message}"
+        tools:text="You walked 5 miles" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{feedElement.datetime}"
+        tools:text="2h ago" />
+    </LinearLayout>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="center_vertical|end"
+      android:gravity="center_vertical"
+      android:text="@{@string/feed_amount_format(feedElement.amount)}"
+      tools:text="$ 56.60" />
+
+  </FrameLayout>
+</layout>

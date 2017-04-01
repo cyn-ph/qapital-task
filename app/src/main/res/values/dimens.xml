@@ -3,4 +3,6 @@
   <dimen name="small">12dp</dimen>
   <dimen name="goal_card_height">160dp</dimen>
   <dimen name="medium">20dp</dimen>
+  <dimen name="img_toolbar_height">160dp</dimen>
+  <dimen name="saving_rules_section">50dp</dimen>
 </resources>

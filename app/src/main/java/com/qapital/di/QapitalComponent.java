@@ -1,5 +1,7 @@
 package com.qapital.di;
 
+import com.qapital.goaldetails.di.GoalDetailsComponent;
+import com.qapital.goaldetails.di.GoalDetailsModule;
 import com.qapital.goals.di.GoalsComponent;
 import com.qapital.goals.di.GoalsModule;
 import com.qapital.goals.model.GoalsIntentService;
@@ -17,4 +19,6 @@ public interface QapitalComponent {
   GoalsComponent plus(GoalsModule module);
 
   void inject(GoalsIntentService goalsIntentService);
+
+  GoalDetailsComponent plus(GoalDetailsModule module);
 }

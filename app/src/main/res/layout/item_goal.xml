@@ -34,6 +34,12 @@
         android:contentDescription="@null"
         app:imageUrl="@{goal.imageUrl}" />
 
+      <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/goal_card_height"
+        android:background="@color/overlay" />
+
       <TextView
         android:id="@+id/txt_goal_name"
         style="@style/Base.TextAppearance.AppCompat.Large"

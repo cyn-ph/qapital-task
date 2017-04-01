@@ -20,6 +20,11 @@
       </intent-filter>
     </activity>
 
+    <activity
+      android:name=".goaldetails.view.GoalDetailsActivity"
+      android:parentActivityName=".goals.view.GoalsActivity"
+      android:theme="@style/AppTheme.NoActionBar" />
+
     <service
       android:name="com.qapital.goals.model.GoalsIntentService"
       android:exported="false" />

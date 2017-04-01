@@ -44,7 +44,7 @@ public class GoalsAdapter extends RecyclerView.Adapter<GoalsAdapter.GoalViewHold
   }
 
   public void updateGoals(List<Goal> newGoals) {
-    this.goals = newGoals == null ? new LinkedList<Goal>() : newGoals;
+    this.goals = (newGoals == null ? new LinkedList<Goal>() : newGoals);
     notifyDataSetChanged();
   }
 

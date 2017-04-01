@@ -1,6 +1,8 @@
 package com.qapital.common.beans;
 
 import android.databinding.BindingAdapter;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.ImageView;
 
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +15,7 @@ import java.util.List;
  * Created by cyn on 03/31/2017.
  */
 
-public class Goal {
+public class Goal implements Parcelable {
   @SerializedName("goalImageURL")
   private String imageUrl;
   @SerializedName("userId")
@@ -40,6 +42,28 @@ public class Goal {
     this.name = name;
     this.imageUrl = imageUrl;
   }
+
+  protected Goal(Parcel in) {
+    imageUrl = in.readString();
+    userId = in.readInt();
+    targetAmount = in.readFloat();
+    currentAmount = in.readFloat();
+    status = in.readString();
+    name = in.readString();
+    id = in.readInt();
+  }
+
+  public static final Creator<Goal> CREATOR = new Creator<Goal>() {
+    @Override
+    public Goal createFromParcel(Parcel in) {
+      return new Goal(in);
+    }
+
+    @Override
+    public Goal[] newArray(int size) {
+      return new Goal[size];
+    }
+  };
 
   public String getImageUrl() {
     return imageUrl;
@@ -80,5 +104,21 @@ public class Goal {
         .load(imageUrl)
         .placeholder(R.drawable.ic_image)
         .into(view);
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(imageUrl);
+    parcel.writeInt(userId);
+    parcel.writeFloat(targetAmount);
+    parcel.writeFloat(currentAmount);
+    parcel.writeString(status);
+    parcel.writeString(name);
+    parcel.writeInt(id);
   }
 }

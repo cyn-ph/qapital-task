@@ -2,4 +2,7 @@
   <string name="app_name">Qapital</string>
   <!-- Goals list-->
   <string name="progress_format">$ %1$s of $ %2$s</string>
+  <string name="label_your_rules">Your Rules</string>
+  <!-- Goal details list-->
+  <string name="feed_amount_format">$ %1$s</string>
 </resources>

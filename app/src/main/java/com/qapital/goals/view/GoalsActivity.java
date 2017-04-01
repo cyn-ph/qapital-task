@@ -1,17 +1,18 @@
 package com.qapital.goals.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.qapital.QapitalApplication;
 import com.qapital.R;
 import com.qapital.common.beans.Goal;
 import com.qapital.di.QapitalComponent;
+import com.qapital.goaldetails.view.GoalDetailsActivity;
 import com.qapital.goals.di.GoalsComponent;
 import com.qapital.goals.di.GoalsModule;
 import com.qapital.goals.presenter.GoalsPresenter;
@@ -47,8 +48,6 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
     setContentView(R.layout.activity_goals);
     // Recycler view
     RecyclerView goalsList = (RecyclerView) findViewById(R.id.goals_list);
-    // Use this setting to improve performance if you know that changes
-    // in content do not change the layout size of the RecyclerView
     goalsList.setHasFixedSize(true);
     goalsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -78,7 +77,8 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
 
   @Override
   public void onGoalSelected(Goal goal) {
-// TODO: 04/01/2017 start activity Goals details
-    Toast.makeText(this, "Goal " + goal.getName(), Toast.LENGTH_SHORT).show();
+    Intent intent = new Intent(this, GoalDetailsActivity.class);
+    intent.putExtra("Goal", goal);
+    startActivity(intent);
   }
 }
