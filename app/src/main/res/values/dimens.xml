@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="small">12dp</dimen>
+  <dimen name="goal_card_height">160dp</dimen>
+  <dimen name="medium">20dp</dimen>
+</resources>
