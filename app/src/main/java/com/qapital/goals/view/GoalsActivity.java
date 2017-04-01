@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.qapital.QapitalApplication;
 import com.qapital.R;
@@ -39,6 +40,11 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
     public void fillUpGoalsList(List<Goal> goals) {
       goalsAdapter.updateGoals(goals);
     }
+
+    @Override
+    public void showError() {
+      Toast.makeText(GoalsActivity.this, "Somenthing went wrong!", Toast.LENGTH_SHORT).show();
+    }
   };
   private GoalsAdapter goalsAdapter;
 
@@ -50,17 +56,7 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
     RecyclerView goalsList = (RecyclerView) findViewById(R.id.goals_list);
     goalsList.setHasFixedSize(true);
     goalsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-    // TODO: 04/01/2017 remove when Rx is implemented
-    Goal goal1 = new Goal(230, 1900, "Road Trip",
-        "https://images-na.ssl-images-amazon.com/images/I/51S0aQLkDCL.jpg");
-    Goal goal2 = new Goal(600, 220000, "Dream house",
-        "https://images-na.ssl-images-amazon.com/images/I/51S0aQLkDCL.jpg");
-    List<Goal> goals = new LinkedList<>();
-    goals.add(goal1);
-    goals.add(goal2);
-    // Create and sets the adapter
-    goalsAdapter = new GoalsAdapter(goals, this);
+    goalsAdapter = new GoalsAdapter(new LinkedList<Goal>(), this);
     goalsList.setAdapter(goalsAdapter);
 
     //ProgressBar
@@ -73,6 +69,18 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
     presenter.setView(view);
 
     presenter.getGoalsList();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    presenter.onStop();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    presenter.onDestroy();
   }
 
   @Override

@@ -1,9 +1,14 @@
 package com.qapital.goals.model;
 
 import android.content.Context;
-import android.content.Intent;
+
+import com.qapital.common.api.QapitalAPI;
+import com.qapital.common.beans.SavingGoals;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+
 
 /**
  * Created by cyn on 04/01/2017.
@@ -12,15 +17,16 @@ import javax.inject.Inject;
 public class GoalsInteractorImpl implements GoalsInteractor {
 
   Context context;
+  QapitalAPI qapitalAPI;
 
   @Inject
-  public GoalsInteractorImpl(Context context) {
+  public GoalsInteractorImpl(Context context, QapitalAPI qapitalAPI) {
     this.context = context;
+    this.qapitalAPI = qapitalAPI;
   }
 
   @Override
-  public void fetchGoalsList() {
-    Intent intentService = new Intent(context, GoalsIntentService.class);
-    context.startService(intentService);
+  public Observable<SavingGoals> fetchGoalsList() {
+    return qapitalAPI.getGoalsList();
   }
 }

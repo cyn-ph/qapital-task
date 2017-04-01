@@ -17,4 +17,5 @@ public interface GoalsView extends BaseView {
 
   void fillUpGoalsList(List<Goal> goals);
 
+  void showError();
 }

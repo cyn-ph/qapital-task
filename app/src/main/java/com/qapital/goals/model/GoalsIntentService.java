@@ -3,17 +3,11 @@ package com.qapital.goals.model;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.qapital.QapitalApplication;
 import com.qapital.common.api.QapitalAPI;
-import com.qapital.common.beans.SavingGoals;
-
-import java.io.IOException;
 
 import javax.inject.Inject;
-
-import retrofit2.Response;
 
 /**
  * Created by cyn on 04/01/2017.
@@ -37,17 +31,17 @@ public class GoalsIntentService extends IntentService {
 
   @Override
   protected void onHandleIntent(@Nullable Intent intent) {
-    Log.d(TAG, "onHandleIntent: ");
-    try {
-      final Response<SavingGoals> response = qapitalAPI.getGoalsList().execute();
-      if (response.isSuccessful()) {
-        final SavingGoals savingGoals = response.body();
-        Log.d(TAG, "fetchGoalsList: " + savingGoals.getGoals().size());
-      } else {
-        Log.d(TAG, "onHandleIntent: call failed ");
-      }
-    } catch (IOException e) {
-      Log.e(TAG, "onHandleIntent: ", e);
-    }
+//    Log.d(TAG, "onHandleIntent: ");
+//    try {
+//      final Response<SavingGoals> response = qapitalAPI.getGoalsList().execute();
+//      if (response.isSuccessful()) {
+//        final SavingGoals savingGoals = response.body();
+//        Log.d(TAG, "fetchGoalsList: " + savingGoals.getGoals().size());
+//      } else {
+//        Log.d(TAG, "onHandleIntent: call failed ");
+//      }
+//    } catch (IOException e) {
+//      Log.e(TAG, "onHandleIntent: ", e);
+//    }
   }
 }

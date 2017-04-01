@@ -1,6 +1,5 @@
 package com.qapital.common.presenter;
 
-import android.os.Bundle;
 import android.support.annotation.CallSuper;
 
 import com.qapital.common.view.BaseView;
@@ -26,15 +25,4 @@ public class BasePresenter<T extends BaseView> {
     view = null;
   }
 
-  public void onViewAttached() {
-    // no impl by default
-  }
-
-  public void onSaveInstanceState(Bundle state) {
-    // no impl by default
-  }
-
-  public void onRestoreInstanceState(Bundle state) {
-    // no impl by default
-  }
 }

@@ -9,4 +9,6 @@ import com.qapital.goals.view.GoalsView;
 
 public abstract class GoalsPresenter extends BasePresenter<GoalsView> {
   public abstract void getGoalsList();
+
+  public abstract void onStop();
 }
