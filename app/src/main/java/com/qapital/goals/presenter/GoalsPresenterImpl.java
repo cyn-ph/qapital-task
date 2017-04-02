@@ -21,7 +21,6 @@ public class GoalsPresenterImpl extends GoalsPresenter {
   private GoalsInteractor interactor;
   private Disposable disposable;
 
-
   @Inject
   public GoalsPresenterImpl(GoalsInteractor interactor) {
     this.interactor = interactor;
