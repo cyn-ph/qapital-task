@@ -98,7 +98,6 @@ public class Goal implements Parcelable {
   }
 
   @BindingAdapter({"app:imageUrl"})
-//  @BindingAdapter({"android:src"})
   public static void loadImage(ImageView view, String imageUrl) {
     Picasso.with(view.getContext())
         .load(imageUrl)

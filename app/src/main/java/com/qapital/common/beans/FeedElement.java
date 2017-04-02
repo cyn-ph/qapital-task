@@ -49,7 +49,6 @@ public class FeedElement {
   }
 
   public String getMessage() {
-
     return message;
   }
 
