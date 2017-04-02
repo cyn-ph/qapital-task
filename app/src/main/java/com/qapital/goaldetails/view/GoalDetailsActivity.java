@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -105,7 +107,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
     TextView txtGoalName = (TextView) findViewById(R.id.txt_goal_name);
     txtGoalName.setText(goal.getName());
     TextView txtGoalProgress = (TextView) findViewById(R.id.txt_goal_progress);
-    txtGoalProgress.setText(getString(R.string.progress_format,goal.getCurrentAmount(),
+    txtGoalProgress.setText(getString(R.string.progress_format, goal.getCurrentAmount(),
         goal.getTargetAmount()));
     ProgressBar goalProgress = (ProgressBar) findViewById(R.id.progress);
     goalProgress.setProgress(QapitalUtils.getProgress(goal.getCurrentAmount(),
@@ -132,5 +134,12 @@ public class GoalDetailsActivity extends AppCompatActivity {
   protected void onDestroy() {
     presenter.onDestroy();
     super.onDestroy();
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.goal_details_menu, menu);
+    return true;
   }
 }

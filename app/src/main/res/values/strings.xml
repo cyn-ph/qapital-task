@@ -5,4 +5,5 @@
   <string name="label_your_rules">Your Rules</string>
   <!-- Goal details list-->
   <string name="feed_amount_format">$ %1$.2f</string>
+  <string name="edit_option_name">Edit</string>
 </resources>
