@@ -5,6 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qapital.QapitalApplication;
 import com.qapital.R;
@@ -16,8 +21,9 @@ import com.qapital.di.QapitalComponent;
 import com.qapital.goaldetails.di.GoalDetailsComponent;
 import com.qapital.goaldetails.di.GoalDetailsModule;
 import com.qapital.goaldetails.presenter.GoalDetailsPresenter;
+import com.qapital.utils.QapitalUtils;
+import com.squareup.picasso.Picasso;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +40,7 @@ public class GoalDetailsActivity extends AppCompatActivity {
   GoalDetailsPresenter presenter;
   private SavingRuleAdapter rulesAdapter;
   private FeedElementAdapter feedAdapter;
-  GoalDetailsView view = new GoalDetailsView() {
+  private GoalDetailsView view = new GoalDetailsView() {
     @Override
     public void fillUpFeed(List<FeedElement> feed) {
       feedAdapter.updateFeed(feed);
@@ -43,6 +49,18 @@ public class GoalDetailsActivity extends AppCompatActivity {
     @Override
     public void fillUpSavingRules(List<SavingRule> rules) {
       rulesAdapter.updateItemListWithAnimation(rules);
+    }
+
+    @Override
+    public void showErrorFeed() {
+      Toast.makeText(GoalDetailsActivity.this, "Something went wrong while fetching the feed!",
+          Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showErrorRules() {
+      Toast.makeText(GoalDetailsActivity.this, "Something went wrong while fetching the rules!",
+          Toast.LENGTH_SHORT).show();
     }
   };
 
@@ -60,24 +78,39 @@ public class GoalDetailsActivity extends AppCompatActivity {
     feed.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     // Add an item decorator to draw the dividers
     feed.addItemDecoration(new BaseItemDecoration(this, R.drawable.item_decorator));
-
-    // TODO: 04/01/2017 remove
-    List<FeedElement> feedElements = new LinkedList<>();
-    feedElements.add(new FeedElement(new Date(), "made a round up", 10));
-    feedElements.add(new FeedElement(new Date(), "made a round up", 20));
-    feedElements.add(new FeedElement(new Date(), "made a round up", 30));
-    feedElements.add(new FeedElement(new Date(), "made a round up", 40));
-    feedElements.add(new FeedElement(new Date(), "made a round up", 50));
-    feedElements.add(new FeedElement(new Date(), "made a round up", 60));
-    feedAdapter = new FeedElementAdapter(feedElements);
+    feedAdapter = new FeedElementAdapter(new LinkedList<FeedElement>());
     feed.setAdapter(feedAdapter);
 
     //RecyclerView rules
     RecyclerView rules = (RecyclerView) findViewById(R.id.saving_rules);
-    feed.setHasFixedSize(true);
-    feed.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+    rules.setHasFixedSize(true);
+    rules.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     rulesAdapter = new SavingRuleAdapter(new LinkedList<SavingRule>(), R.layout.item_rule);
-    feed.setAdapter(rulesAdapter);
+    rules.setAdapter(rulesAdapter);
+
+    //HeaderImage
+    ImageView imgHeader = (ImageView) findViewById(R.id.img_header);
+    Picasso.with(this)
+        .load(goal.getImageUrl())
+        .placeholder(R.drawable.ic_image)
+        .into(imgHeader);
+
+    //Actionbar
+    final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    setTitle(null);
+
+    //GoalDetails
+    TextView txtGoalName = (TextView) findViewById(R.id.txt_goal_name);
+    txtGoalName.setText(goal.getName());
+    TextView txtGoalProgress = (TextView) findViewById(R.id.txt_goal_progress);
+    txtGoalProgress.setText(getString(R.string.progress_format,goal.getCurrentAmount(),
+        goal.getTargetAmount()));
+    ProgressBar goalProgress = (ProgressBar) findViewById(R.id.progress);
+    goalProgress.setProgress(QapitalUtils.getProgress(goal.getCurrentAmount(),
+        goal.getTargetAmount()));
+
 
     //Inject the presenter
     QapitalComponent component = (((QapitalApplication) getApplication())).getQapitalComponent();
@@ -87,5 +120,17 @@ public class GoalDetailsActivity extends AppCompatActivity {
 
     presenter.getFeed(goal.getId());
     presenter.getRules();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    presenter.onDestroy();
+  }
+
+  @Override
+  protected void onDestroy() {
+    presenter.onDestroy();
+    super.onDestroy();
   }
 }

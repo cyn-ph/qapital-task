@@ -79,8 +79,8 @@ public class GoalsActivity extends AppCompatActivity implements GoalsAdapter.Goa
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
     presenter.onDestroy();
+    super.onDestroy();
   }
 
   @Override

@@ -4,6 +4,8 @@
 
   <data>
 
+    <import type="android.text.Html" />
+
     <variable
       name="feedElement"
       type="com.qapital.common.beans.FeedElement" />
@@ -23,14 +25,28 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{feedElement.message}"
+        android:text="@{Html.fromHtml(feedElement.message)}"
         tools:text="You walked 5 miles" />
 
-      <TextView
-        android:layout_width="wrap_content"
+      <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{feedElement.datetime}"
-        tools:text="2h ago" />
+        android:gravity="center_vertical">
+
+        <ImageView
+          android:layout_width="15dp"
+          android:layout_height="15dp"
+          android:layout_margin="@dimen/extra_small"
+          android:src="@drawable/ic_default" />
+
+        <TextView
+          style="@style/Base.TextAppearance.AppCompat.Small"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@{feedElement.datetime}"
+          tools:text="2h ago" />
+
+      </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -39,6 +55,7 @@
       android:layout_gravity="center_vertical|end"
       android:gravity="center_vertical"
       android:text="@{@string/feed_amount_format(feedElement.amount)}"
+      android:textColor="@color/green"
       tools:text="$ 56.60" />
 
   </FrameLayout>

@@ -19,4 +19,8 @@ public class QapitalUtils {
     return getRelativeTimeSpanString(date.getTime(),
         new Date().getTime(), SECOND_IN_MILLIS, FORMAT_SHOW_YEAR);
   }
+
+  public static int getProgress(float current, float total) {
+    return (int) ((current * 100) / total);
+  }
 }

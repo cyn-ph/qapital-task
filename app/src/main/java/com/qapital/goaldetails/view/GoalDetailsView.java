@@ -14,4 +14,8 @@ public interface GoalDetailsView extends BaseView {
   void fillUpFeed(List<FeedElement> feed);
 
   void fillUpSavingRules(List<SavingRule> rules);
+
+  void showErrorFeed();
+
+  void showErrorRules();
 }

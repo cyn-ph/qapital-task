@@ -1,7 +1,5 @@
 package com.qapital.goals.model;
 
-import android.content.Context;
-
 import com.qapital.common.api.QapitalAPI;
 import com.qapital.common.beans.SavingGoals;
 
@@ -16,12 +14,10 @@ import io.reactivex.Observable;
 
 public class GoalsInteractorImpl implements GoalsInteractor {
 
-  Context context;
   QapitalAPI qapitalAPI;
 
   @Inject
-  public GoalsInteractorImpl(Context context, QapitalAPI qapitalAPI) {
-    this.context = context;
+  public GoalsInteractorImpl(QapitalAPI qapitalAPI) {
     this.qapitalAPI = qapitalAPI;
   }
 

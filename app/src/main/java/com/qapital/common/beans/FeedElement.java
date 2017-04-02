@@ -1,6 +1,7 @@
 package com.qapital.common.beans;
 
 import com.google.gson.annotations.SerializedName;
+import com.qapital.R;
 import com.qapital.utils.QapitalUtils;
 
 import java.util.Date;
@@ -24,6 +25,7 @@ public class FeedElement {
   private int userId;
   @SerializedName("savingsRuleId")
   private int savingRuleId;
+  private int resId;
 
   public FeedElement() {
   }
@@ -47,6 +49,7 @@ public class FeedElement {
   }
 
   public String getMessage() {
+
     return message;
   }
 
@@ -60,5 +63,9 @@ public class FeedElement {
 
   public int getSavingRuleId() {
     return savingRuleId;
+  }
+
+  public int getResId() {
+    return R.drawable.ic_default;
   }
 }

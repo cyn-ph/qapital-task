@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/main_content"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:fitsSystemWindows="true"
@@ -44,31 +43,84 @@
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+      <LinearLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/small"
+        android:layout_marginEnd="@dimen/large"
+        android:layout_marginStart="@dimen/large"
+        android:orientation="vertical"
+        app:layout_collapseMode="pin">
+
+        <TextView
+          android:id="@+id/txt_goal_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/extra_small"
+          android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+          android:id="@+id/txt_goal_progress"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/extra_small"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <ProgressBar
+          android:id="@+id/progress"
+          style="?android:attr/progressBarStyleHorizontal"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="100" />
+
+      </LinearLayout>
+
     </android.support.design.widget.CollapsingToolbarLayout>
 
   </android.support.design.widget.AppBarLayout>
 
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_anchorGravity="bottom">
-
-    <TextView
-      android:layout_width="@dimen/saving_rules_section"
-      android:layout_height="match_parent"
-      android:gravity="center_vertical"
-      android:text="@string/label_your_rules" />
-
-    <android.support.v7.widget.RecyclerView
-      android:id="@+id/saving_rules"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/saving_rules_section" />
-  </LinearLayout>
-
-  <android.support.v7.widget.RecyclerView
-    android:id="@+id/feed"
+  <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/small" />
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/saving_rules_section"
+        android:layout_margin="@dimen/small">
+
+        <TextView
+          android:layout_width="@dimen/saving_rules_section"
+          android:layout_height="match_parent"
+          android:gravity="center_vertical"
+          android:text="@string/label_your_rules" />
+
+        <android.support.v7.widget.RecyclerView
+          android:id="@+id/saving_rules"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+      </LinearLayout>
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/feed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small" />
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+
+  <android.support.design.widget.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
+    android:src="@drawable/ic_add" />
 
 </android.support.design.widget.CoordinatorLayout>

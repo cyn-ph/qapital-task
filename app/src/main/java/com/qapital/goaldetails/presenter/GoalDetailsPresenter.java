@@ -13,4 +13,6 @@ public abstract class GoalDetailsPresenter extends BasePresenter<GoalDetailsView
 
   public abstract void getRules();
 
+  public abstract void onStop();
+
 }
